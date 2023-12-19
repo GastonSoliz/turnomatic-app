@@ -56,9 +56,35 @@ PLANIFICACION BACK-END:
       READ ONE
       UPDATE DOCTOR
         FALTA VERIFICACION Y PRUEBAS
-        SE DEBE ENVIAR DESDE EL FRONT-END TODOS LOS DATOS
+        SE DEBE ENVIAR DESDE EL FRONT-END TODOS LOS DATOS??
       UPDATE PASSWORD??
+        PERO PUEDE SER UN PASSWORD GENERAL PARA USER Y DOCTOR?
       DELETE DOCTOR
+
+      BODY:
+      {
+  "name":"Gaston",
+  "lastname":"Soliz",
+  "registration":"56497",
+  "schedules":"7:00AM to 9:00AM",
+  "coverage":"PAMI",
+  "private":"Yes",
+  "ubication":"332 Bis 1160",
+  "phoneNumber":"11658924",
+  "description":"ASDASDASD",
+  "experience":"asdasd",
+  "studies":"asdasd",
+  "photo":"asdasd",
+  "contact":"PhoneNumber"
+}
+    SPECIALTY
+      CREATE
+      READ ALL(FILTROS Y SELECCION)
+      BODY:
+      {
+        "name":"Cardiologia"
+      }
+
 PLANIFICACION FRONT-END:
   PERFIL DE DOCTOR:
     TODOS SUS DATOS(Como perfil de LinkedIn)
