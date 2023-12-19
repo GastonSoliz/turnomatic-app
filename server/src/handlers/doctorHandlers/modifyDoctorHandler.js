@@ -34,7 +34,7 @@ const modifyDoctorHandler = async (req, res) => {
       photo,
       contact
     );
-    res.status(201).json(doctorUpdated);
+    res.status(200).json(doctorUpdated);
   } catch (error) {
     res.status(500).json(error);
   }
