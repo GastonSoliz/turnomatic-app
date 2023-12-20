@@ -1,4 +1,6 @@
-const { Doctor } = require("../../db");
+const { Doctor, Specialty } = require("../../db");
+const createSpecialty = require("../specialtyControllers/createSpecialty");
+const getDoctor = require("./getDoctor");
 
 const modifyDoctor = async (
   id,
@@ -14,25 +16,55 @@ const modifyDoctor = async (
   experience,
   studies,
   photo,
-  contact
+  contact,
+  specialty
 ) => {
   try {
-    const doctorToUpdate = await Doctor.findByPk(id);
+    const doctorToUpdate = await getDoctor(id);
     if (!doctorToUpdate) throw new Error("There's no doctor with this ID");
+    // console.log(doctorToUpdate.Specialties[0].name);
     const updates = {
-      ...(name !== undefined && { name }),
-      ...(lastname !== undefined && { lastname }),
-      ...(registration !== undefined && { registration }),
-      ...(schedules !== undefined && { schedules }),
-      ...(coverage !== undefined && { coverage }),
-      ...(private !== undefined && { private }),
-      ...(phoneNumber !== undefined && { phoneNumber }),
-      ...(description !== undefined && { description }),
-      ...(experience !== undefined && { experience }),
-      ...(studies !== undefined && { studies }),
-      ...(photo !== undefined && { photo }),
-      ...(contact !== undefined && { contact }),
+      ...(name !== undefined && name !== "" && { name }),
+      ...(lastname !== undefined && lastname !== "" && { lastname }),
+      ...(registration !== undefined &&
+        registration !== "" && { registration }),
+      ...(schedules !== undefined && schedules !== "" && { schedules }),
+      ...(coverage !== undefined && coverage !== "" && { coverage }),
+      ...(private !== undefined && private !== "" && { private }),
+      ...(ubication !== undefined && ubication !== "" && { ubication }),
+      ...(phoneNumber !== undefined && phoneNumber !== "" && { phoneNumber }),
+      ...(description !== undefined && description !== "" && { description }),
+      ...(experience !== undefined && experience !== "" && { experience }),
+      ...(studies !== undefined && studies !== "" && { studies }),
+      ...(photo !== undefined && photo !== "" && { photo }),
+      ...(contact !== undefined && contact !== "" && { contact }),
     };
+    if (specialty !== undefined || specialty.length > 0) {
+      specialty.map(async (elem) => {
+        let trueSpecialty = elem.trim();
+        trueSpecialty =
+          trueSpecialty.charAt(0).toUpperCase() + trueSpecialty.slice(1);
+        if (!doctorToUpdate.Specialties.includes(trueSpecialty)) {
+          const existSpecialty = await Specialty.findOne({
+            where: { name: trueSpecialty },
+          });
+          if (existSpecialty) {
+            await doctorToUpdate.addSpecialties(existSpecialty);
+          } else {
+            const newSpecialty = await createSpecialty(trueSpecialty);
+            await doctorToUpdate.addSpecialties(newSpecialty);
+          }
+        }
+      });
+      doctorToUpdate.Specialties.map(async (elem) => {
+        if (!specialty.includes(elem.name)) {
+          const specialtyToRemove = await Specialty.findOne({
+            where: { name: elem.name },
+          });
+          await doctorToUpdate.removeSpecialties(specialtyToRemove);
+        }
+      });
+    }
     await doctorToUpdate.update(updates);
     return doctorToUpdate;
   } catch (error) {

@@ -16,6 +16,7 @@ const modifyDoctorHandler = async (req, res) => {
     studies,
     photo,
     contact,
+    specialty,
   } = req.body;
   try {
     const doctorUpdated = await modifyDoctor(
@@ -32,11 +33,13 @@ const modifyDoctorHandler = async (req, res) => {
       experience,
       studies,
       photo,
-      contact
+      contact,
+      specialty
     );
     res.status(200).json(doctorUpdated);
   } catch (error) {
-    res.status(500).json(error);
+    console.log(error);
+    res.status(500).json({ error: error.message });
   }
 };
 
