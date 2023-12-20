@@ -8,7 +8,7 @@ const createSpecialtyHandler = async (req, res) => {
     const newSpeciality = await createSpecialty(name);
     res.status(201).json(newSpeciality);
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 

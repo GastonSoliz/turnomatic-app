@@ -31,10 +31,13 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Doctor, User, Shift, Specialty } = sequelize.models;
+const { Doctor, User, Coverage, Shift, Specialty } = sequelize.models;
 
 Doctor.belongsToMany(Specialty, { through: "doctor_specialty" });
 Specialty.belongsToMany(Doctor, { through: "doctor_specialty" });
+
+User.belongsToMany(Coverage, { through: "user_coverage" });
+Coverage.belongsToMany(User, { through: "user_coverage" });
 
 module.exports = {
   ...sequelize.models,
