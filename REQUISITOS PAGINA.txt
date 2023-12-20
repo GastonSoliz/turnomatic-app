@@ -87,7 +87,15 @@ PLANIFICACION BACK-END:
       }
 
     USER 
-      
+
+    COVERAGE 
+      CREATE
+        READ ALL(FILTROS Y SELECCION)
+        BODY:
+        {
+          "name":"Pami"
+        }
+
 
 PLANIFICACION FRONT-END:
   PERFIL DE DOCTOR:
