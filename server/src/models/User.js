@@ -26,12 +26,6 @@ module.exports = (sequelize) => {
       photo: {
         type: DataTypes.STRING,
       },
-      coverage: {
-        type: DataTypes.STRING,
-      },
-      coverage_id: {
-        type: DataTypes.INTEGER,
-      },
       phoneNumber: {
         type: DataTypes.INTEGER,
       },

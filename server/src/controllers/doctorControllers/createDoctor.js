@@ -8,7 +8,7 @@ const createDoctor = async (mail, password) => {
     const newDoctor = await Doctor.create({ mail, password });
     return newDoctor;
   } catch (error) {
-    throw new Error("Unable to create this event: " + error.message);
+    throw new Error("Unable to create this doctor: " + error.message);
   }
 };
 
