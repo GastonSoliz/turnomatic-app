@@ -79,6 +79,25 @@ PLANIFICACION BACK-END:
   "photo":"asdasd",
   "contact":"PhoneNumber"
 }
+    USER 
+      CREATE 
+        VALIDACIONES**
+      READ ALL
+      READ ONE
+      UPDATE
+        VALIDACIONES**
+        ENVIAR TODOS LOS DATOS COMO EL BODY
+      DELETE USER
+
+      BODY:
+      {
+  "name":"Gaston",
+  "lastname":"",
+  "photo":"",
+  "phoneNumber":"",
+  "coverage":["SWISS MEDICAL"]
+}
+
     SPECIALTY
       CREATE
       READ ALL(FILTROS Y SELECCION)
@@ -86,12 +105,6 @@ PLANIFICACION BACK-END:
       {
         "name":"Cardiologia"
       }
-
-    USER 
-      CREATE 
-        VALIDACIONES**
-      READ ALL
-      READ ONE
 
     COVERAGE 
       CREATE
